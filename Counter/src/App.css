@@ -1,4 +1,3 @@
-/* Full-page layout with a calm, minimal background. */
 .react-counter {
   position: relative;
   min-height: 100vh;
@@ -11,20 +10,18 @@
     radial-gradient(circle at 20% 15%, rgba(125, 211, 252, 0.32), transparent 30%),
     radial-gradient(circle at 82% 76%, rgba(167, 243, 208, 0.42), transparent 28%),
     linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: min(70vw, 520px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    filter: blur(72px);
+  }
 }
 
-/* Soft blur keeps the page elegant without making it busy. */
-.react-counter::before {
-  content: "";
-  position: absolute;
-  width: min(70vw, 520px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
-  filter: blur(72px);
-}
-
-/* Main card keeps all counter controls in one focused area. */
 .counter-card {
   position: relative;
   width: min(100%, 390px);
@@ -36,15 +33,19 @@
   backdrop-filter: blur(18px);
 }
 
-/* Header gives the app a clear title without taking too much space. */
 .counter-header {
   display: grid;
   gap: 6px;
   margin-bottom: 22px;
   text-align: left;
+
+  h1 {
+    color: #111827;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
 }
 
-/* Small label above the main title. */
 .counter-eyebrow {
   color: #0f766e;
   font-size: 0.76rem;
@@ -53,14 +54,6 @@
   text-transform: uppercase;
 }
 
-/* Main title style. */
-.counter-header h1 {
-  color: #111827;
-  font-size: 2rem;
-  line-height: 1.1;
-}
-
-/* Number area separates the value from the controls. */
 .counter-display-box {
   display: grid;
   place-items: center;
@@ -70,7 +63,7 @@
   background: #f8fafc;
 }
 
-/* Large counter number. Tabular numbers avoid layout shifting while counting. */
+/* Tabular numbers prevent the layout from shifting while the count changes. */
 .count-display {
   color: #1d4ed8;
   font-size: clamp(4.5rem, 18vw, 6.8rem);
@@ -79,14 +72,12 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Text below the counter value. */
 .count-label {
   color: #64748b;
   font-size: 0.92rem;
   font-weight: 700;
 }
 
-/* Min and max labels help explain the progress bar. */
 .counter-meta {
   display: flex;
   justify-content: space-between;
@@ -96,25 +87,22 @@
   font-weight: 800;
 }
 
-/* Track for the counter progress. */
 .progress-track {
   height: 8px;
   overflow: hidden;
   margin-top: 8px;
   border-radius: 999px;
   background: #e2e8f0;
+
+  .progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #14b8a6, #2563eb);
+    transition: width 180ms ease;
+  }
 }
 
-/* Filled progress changes width from React state. */
-.progress-fill {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #14b8a6, #2563eb);
-  transition: width 180ms ease;
-}
-
-/* Three simple controls: decrease, reset, increase. */
 .counter-actions {
   display: grid;
   grid-template-columns: 56px 1fr 56px;
@@ -122,7 +110,6 @@
   margin-top: 22px;
 }
 
-/* Shared button styles for consistent size, shape, and animation. */
 .counter,
 .reset-button {
   min-height: 52px;
@@ -136,9 +123,28 @@
     box-shadow 160ms ease,
     background-color 160ms ease,
     border-color 160ms ease;
+
+  &:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 3px;
+  }
 }
 
-/* Round icon buttons make increment and decrement feel quick. */
+.counter {
+  &:disabled {
+    opacity: 0.42;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  &:not(:disabled):hover {
+    transform: translateY(-2px);
+    border-color: #93c5fd;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  }
+}
+
 .icon-button {
   display: grid;
   place-items: center;
@@ -146,46 +152,26 @@
   background: #ffffff;
   font-size: 1.55rem;
   line-height: 1;
+
+  &.primary {
+    color: #ffffff;
+    border-color: #2563eb;
+    background: #2563eb;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
+  }
 }
 
-/* Primary action button style for the main increase action. */
-.icon-button.primary {
-  color: #ffffff;
-  border-color: #2563eb;
-  background: #2563eb;
-  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.2);
-}
-
-/* Disabled buttons show the limit without looking broken. */
-.counter:disabled {
-  opacity: 0.42;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Reset button stays centered as the supporting action. */
 .reset-button {
   color: #475569;
   background: #f8fafc;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: #93c5fd;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  }
 }
 
-/* Lift enabled buttons slightly to make hover feel interactive. */
-.counter:not(:disabled):hover,
-.reset-button:hover {
-  transform: translateY(-2px);
-  border-color: #93c5fd;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-}
-
-/* Visible keyboard focus helps users navigate without a mouse. */
-.counter:focus-visible,
-.reset-button:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.2);
-  outline-offset: 3px;
-}
-
-/* Keep the card comfortable on small screens. */
 @media (max-width: 430px) {
   .counter-card {
     padding: 22px;
