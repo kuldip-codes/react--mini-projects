@@ -1,8 +1,4 @@
-# react--mini-projects
-Hands-on React projects. 
-- Each app is a focused lesson in components, state, and real-world workflows.
-
-# 🚀 Frontend Developer | JavaScript | React
+# 🚀 Frontend Engineer | JavaScript | React | UI 
 
 <!-- Profile Stats -->
 [![](https://visitorbadge.io/badges/JohnDoe/repo-visits-counter?color=brightgreen)](https://visitorbadge.io)
