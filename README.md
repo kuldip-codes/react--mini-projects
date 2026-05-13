@@ -14,10 +14,10 @@ Hands-on React projects.
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3)
 
 <!-- Stats Card -->
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=JohnDoe&show_icons=true&theme=tokyonight)](https://github.com/JohnDoe)
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=kuldip-codes&show_icons=true&theme=tokyonight)](https://github.com/kuldip-codes)
 
 <!-- Top Languages -->
-[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JohnDoe&layout=compact&theme=tokyonight)](https://github.com/JohnDoe)
+[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=kuldip-codes&layout=compact&theme=tokyonight)](https://github.com/kuldip-codes)
 
 <!-- Streak Stats -->
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=JohnDoe&theme=tokyonight)](https://github.com/JohnDoe)
+[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=kuldip-codes&theme=tokyonight)](https://github.com/kuldip-codes)
