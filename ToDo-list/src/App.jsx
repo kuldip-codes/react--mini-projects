@@ -1,14 +1,23 @@
 import { useState } from "react";
 
-const [input, setInput] = useState("");
-
-const addTodo = () => {
-  if (!input) return;
-
-  setInput();
-};
-
 const App = () => {
+  const [todoInput, setTodoInput] = useState("");
+  const [todolist, setTodolist] = useState([]);
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (todoInput.trim() === "") return;
+    setTodolist([
+      ...todolist,
+      { task: todoInput, completed: false, id: Date.now() },
+    ]);
+    setTodoInput("");
+  };
+
+  const removeTask = (id) => {
+    setTodolist(todolist.filter((task) => task.id !== id));
+  };
+
   return (
     <>
       <div className="interactive-bg" aria-hidden="true">
@@ -40,59 +49,60 @@ const App = () => {
               placeholder="Add a new task"
               autoComplete="off"
               maxLength="80"
-              value={value}
-              onChange={(e) => setInput(e.target.value)}
+              value={todoInput}
+              onChange={(e) => setTodoInput(e.target.value)}
             />
             <button type="submit" onClick={addTodo}>
               Add
             </button>
           </form>
 
-          <section className="todo-list-section" aria-labelledby="tasks-title">
-            <div className="list-header">
-              <h2 id="tasks-title">Tasks</h2>
-              <p>2 open</p>
-            </div>
+          {todolist.length !== 0 && (
+            <section
+              className="todo-list-section"
+              aria-labelledby="tasks-title"
+            >
+              <div className="list-header">
+                <h2 id="tasks-title">Tasks</h2>
+                <p>2 open</p>
+              </div>
 
-            <ul className="task-list">
-              <li className="task-item">
-                <div className="task-row">
-                  <label>
-                    <input type="checkbox" />
-                    <span className="task-content">
-                      <strong>Finalize project outline</strong>
-                      <time dateTime="2026-05-13T09:30">Added 9:30 AM</time>
-                    </span>
-                  </label>
-                  <button
-                    className="delete-task"
-                    type="button"
-                    aria-label="Delete Finalize project outline"
-                  >
-                    x
-                  </button>
-                </div>
-              </li>
-              <li className="task-item">
-                <div className="task-row">
-                  <label>
-                    <input type="checkbox" defaultChecked />
-                    <span className="task-content">
-                      <strong>Send standup update</strong>
-                      <time dateTime="2026-05-13T09:15">Added 9:15 AM</time>
-                    </span>
-                  </label>
-                  <button
-                    className="delete-task"
-                    type="button"
-                    aria-label="Delete Send standup update"
-                  >
-                    x
-                  </button>
-                </div>
-              </li>
-            </ul>
-          </section>
+              <ul className="task-list">
+                {todolist.map((task) => (
+                  <li className="task-item" key={task.id}>
+                    <div className="task-row">
+                      <label>
+                        {task.completed ? (
+                          <input type="checkbox" Checked />
+                        ) : (
+                          <input type="checkbox" />
+                        )}
+                        <span className="task-content">
+                          <strong>{task.task}</strong>
+                          <time>
+                            Added{" "}
+                            {new Date().toLocaleTimeString("en-US", {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit",
+                            })}
+                          </time>
+                        </span>
+                      </label>
+                      <button
+                        className="delete-task"
+                        type="button"
+                        aria-label="{todolist.task}"
+                        onClick={() => removeTask(task.id)}
+                      >
+                        x
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </section>
       </main>
     </>
