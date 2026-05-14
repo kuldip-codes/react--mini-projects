@@ -101,7 +101,7 @@ input {
       radial-gradient(circle at 50% 90%, rgb(99 102 241 / 16%), transparent 30%);
     filter: blur(4px);
     opacity: 0.8;
-    animation: ambient-drift 18s ease-in-out infinite alternate;
+    animation: ambient-drift 10s ease-in-out infinite alternate;
   }
 }
 
@@ -417,6 +417,7 @@ body:has(.todo-card:focus-within) {
     height: 20px;
     margin-top: 3px;
     accent-color: var(--accent);
+    cursor: pointer;
 
     &:focus-visible {
       box-shadow: var(--focus-ring);

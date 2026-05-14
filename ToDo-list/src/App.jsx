@@ -18,6 +18,18 @@ const App = () => {
     setTodolist(todolist.filter((task) => task.id !== id));
   };
 
+  const markComplete = (id) => {
+    setTodolist(
+      todolist.map((task) =>
+        task.id === id
+          ? { ...task, completed: !task.completed } // Toggle completed
+          : task,
+      ),
+    );
+  };
+
+  const todayDate = new Date().toLocaleDateString("en-IN", {});
+
   return (
     <>
       <div className="interactive-bg" aria-hidden="true">
@@ -32,7 +44,7 @@ const App = () => {
           <header className="todo-header">
             <div className="header-meta">
               <p className="eyebrow">Minimal planner</p>
-              <span>Today</span>
+              <span>{todayDate}</span>
             </div>
             <h1 id="app-title">Todo List</h1>
             <p>A quiet place to keep a few tasks in view.</p>
@@ -64,7 +76,7 @@ const App = () => {
             >
               <div className="list-header">
                 <h2 id="tasks-title">Tasks</h2>
-                <p>2 open</p>
+                <p>{todolist.filter((task) => !task.completed).length} open</p>
               </div>
 
               <ul className="task-list">
@@ -72,11 +84,11 @@ const App = () => {
                   <li className="task-item" key={task.id}>
                     <div className="task-row">
                       <label>
-                        {task.completed ? (
-                          <input type="checkbox" Checked />
-                        ) : (
-                          <input type="checkbox" />
-                        )}
+                        <input
+                          type="checkbox"
+                          checked={task.completed}
+                          onChange={() => markComplete(task.id)}
+                        />
                         <span className="task-content">
                           <strong>{task.task}</strong>
                           <time>
